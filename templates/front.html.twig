@@ -26,9 +26,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('about') }}">Qui suis-je ?</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('admin_login') }}">Connexion</a>
-                        </li>
+                        {% if app.user %}
+                            <div class="nav-link"><a class="link" href="{{ path('app_logout') }}">Déconnexion</a></div>
+                            <div class="nav-link"><a class="link" href="{{ path('admin_media_index') }}">admin</a></div>
+                        {% else %}
+                            <div class="nav-link"><a class="link" href="{{ path('admin_login') }}">Connexion</a></div>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
