@@ -82,16 +82,24 @@ class HomeController extends AbstractController
         // 2. Récupération des données
         $albums = $albumRepository->findAll();
         $album  = $id ? $albumRepository->find($id) : null;
-
-        // Attention: findOneByAdmin(true) n'existe pas, utilisez findOneBy()
         $user   = $userRepository->findOneBy(['admin' => true]);
 
-        // 3. Logique conditionnelle pour les médias
-        // (Assurez-vous que findByAlbum et findByUser existent dans MediaRepository)
-        $medias = $album
-            ? $mediaRepository->findBy(['album' => $album])
-            : ($user ? $mediaRepository->findBy(['user' => $user]) : []); // Ajout d'une vérification $user et d'un tableau vide par défaut
+        // 3. Récupération des médias
+        if ($album) {
+            $medias = $mediaRepository->findBy(['album' => $album]);
+        } elseif ($user) {
+            $medias = $mediaRepository->findBy(['user' => $user]);
+        } else {
+            $medias = [];
+        }
 
+        // Filtrer les médias : ne garder que ceux dont l'utilisateur est actif
+        $medias = array_filter($medias, function ($media) {
+            $user = $media->getUser();
+            return $user && $user->isActive(); // Seuls les utilisateurs actifs
+        });
+
+        // 5. Rendu du template
         return $this->render('front/portfolio.html.twig', [
             'albums' => $albums,
             'album'  => $album,
