@@ -1,0 +1,51 @@
+name: CI Symfony
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: mariadb:10
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: symfony
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    env:
+      DATABASE_URL: "mysql://root:root@127.0.0.1:3306/symfony_test"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: mbstring, intl, pdo_mysql
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Create Database
+        run: php bin/console doctrine:database:create --if-not-exists --env=test
+
+      - name: Run Migrations
+        run: php bin/console doctrine:migrations:migrate --no-interaction --env=test
+
+      - name: Run Tests
+        run: APP_ENV=test vendor/bin/phpunit
