@@ -11,7 +11,7 @@ class AlbumFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         // Créons 3 albums
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 3; ++$i) {
             $album = new Album();
             $album->setName("Album $i");
 

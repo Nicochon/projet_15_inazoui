@@ -84,7 +84,7 @@ class AlbumControllerTest extends WebTestCase
         $em->flush();
 
         // Accéder à la page de mise à jour
-        $crawler = $client->request('GET', '/admin/album/update/' . $album->getId());
+        $crawler = $client->request('GET', '/admin/album/update/'.$album->getId());
         $this->assertResponseIsSuccessful();
 
         // Remplir le formulaire

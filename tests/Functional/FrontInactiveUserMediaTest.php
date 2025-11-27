@@ -2,12 +2,12 @@
 
 namespace App\Tests\Functional;
 
-use App\Entity\User;
 use App\Entity\Album;
 use App\Entity\Media;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class FrontInactiveUserMediaTest extends WebTestCase
 {
@@ -26,7 +26,7 @@ class FrontInactiveUserMediaTest extends WebTestCase
         // ----- 1) Créer un utilisateur INACTIF -----
         $user = new User();
         $user->setName('User Inactif');
-        $user->setEmail('inactive_' . uniqid() . '@test.com'); // unique
+        $user->setEmail('inactive_'.uniqid().'@test.com'); // unique
         $user->setPassword('password'); // adapter si encodeur
         $user->setActive(false);
 
@@ -34,7 +34,7 @@ class FrontInactiveUserMediaTest extends WebTestCase
 
         // ----- 2) Créer un album -----
         $album = new Album();
-        $album->setName('Album Test ' . uniqid());
+        $album->setName('Album Test '.uniqid());
         $this->em->persist($album);
 
         // ----- 3) Ajouter un média à cet utilisateur -----
@@ -49,7 +49,7 @@ class FrontInactiveUserMediaTest extends WebTestCase
         $this->em->flush();
 
         // ----- 4) Appeler la page du FRONT -----
-        $crawler = $this->client->request('GET', '/portfolio/' . $album->getId());
+        $crawler = $this->client->request('GET', '/portfolio/'.$album->getId());
 
         $this->assertResponseIsSuccessful();
 

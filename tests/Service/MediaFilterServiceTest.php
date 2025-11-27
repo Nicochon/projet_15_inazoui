@@ -2,10 +2,10 @@
 
 namespace App\Tests\Service;
 
-use PHPUnit\Framework\TestCase;
-use App\Service\MediaFilterService;
 use App\Entity\Media;
 use App\Entity\User;
+use App\Service\MediaFilterService;
+use PHPUnit\Framework\TestCase;
 
 class MediaFilterServiceTest extends TestCase
 {

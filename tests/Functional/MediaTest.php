@@ -84,9 +84,9 @@ class MediaTest extends WebTestCase
 
         // Supprimer le fichier temporaire
         unlink($file);
-        $uploadDir = $this->getContainer()->getParameter('kernel.project_dir') . '/public/uploads/';
-        if (file_exists($uploadDir . $media->getPath())) {
-            unlink($uploadDir . $media->getPath());
+        $uploadDir = $this->getContainer()->getParameter('kernel.project_dir').'/public/uploads/';
+        if (file_exists($uploadDir.$media->getPath())) {
+            unlink($uploadDir.$media->getPath());
         }
     }
 }

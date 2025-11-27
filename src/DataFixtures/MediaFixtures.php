@@ -2,12 +2,12 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Album;
 use App\Entity\Media;
 use App\Entity\User;
-use App\Entity\Album;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
 
 class MediaFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -17,10 +17,10 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
         $albums = $manager->getRepository(Album::class)->findAll();
 
         foreach ($users as $user) {
-            for ($i = 1; $i <= 2; $i++) {
+            for ($i = 1; $i <= 2; ++$i) {
                 $media = new Media();
                 $media->setUser($user);
-                $media->setTitle("Media $i de " . $user->getName());
+                $media->setTitle("Media $i de ".$user->getName());
                 $media->setPath("uploads/media/user{$user->getId()}_media$i.jpg");
 
                 $album = $albums[array_rand($albums)];

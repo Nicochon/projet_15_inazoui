@@ -17,9 +17,7 @@ class UserActiveChecker implements UserCheckerInterface
 
         // Bloquer si l'utilisateur est inactif
         if (!$user->isActive()) {
-            throw new CustomUserMessageAccountStatusException(
-                'Votre compte a été révoqué et vous ne pouvez pas vous connecter.'
-            );
+            throw new CustomUserMessageAccountStatusException('Votre compte a été révoqué et vous ne pouvez pas vous connecter.');
         }
     }
 

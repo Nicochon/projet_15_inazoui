@@ -5,16 +5,14 @@ namespace App\Controller;
 use App\Entity\Album;
 use App\Entity\Media;
 use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Service\MediaFilterService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-
-
-use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
@@ -23,27 +21,27 @@ class HomeController extends AbstractController
      */
     public function home(UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
-//        $email = 'ina@zaoui.com';
-//
-//        $user = $userRepository->findOneBy(['email' => $email]);
-//
-//        $hashedPassword = $passwordHasher->hashPassword($user, 'motdepasseTest');
-//        $user->setPassword($hashedPassword);
-//
-//// 3️⃣ Ajouter un rôle
-//        $roles = $user->getRoles();
-//        if (!in_array('ROLE_ADMIN', $roles, true)) {
-//            $roles[] = 'ROLE_ADMIN';
-//        }
-//        $user->setRoles($roles);
-//
-//// 4️⃣ Sauvegarder
-//        $entityManager->persist($user);
-//        $entityManager->flush();
-//
-//
-//        dump($user);
-//        die;
+        //        $email = 'ina@zaoui.com';
+        //
+        //        $user = $userRepository->findOneBy(['email' => $email]);
+        //
+        //        $hashedPassword = $passwordHasher->hashPassword($user, 'motdepasseTest');
+        //        $user->setPassword($hashedPassword);
+        //
+        // // 3️⃣ Ajouter un rôle
+        //        $roles = $user->getRoles();
+        //        if (!in_array('ROLE_ADMIN', $roles, true)) {
+        //            $roles[] = 'ROLE_ADMIN';
+        //        }
+        //        $user->setRoles($roles);
+        //
+        // // 4️⃣ Sauvegarder
+        //        $entityManager->persist($user);
+        //        $entityManager->flush();
+        //
+        //
+        //        dump($user);
+        //        die;
 
         return $this->render('front/home.html.twig');
     }
@@ -54,8 +52,9 @@ class HomeController extends AbstractController
     public function guests(ManagerRegistry $doctrine): Response
     {
         $guests = $doctrine->getRepository(User::class)->findBy(['admin' => false]);
+
         return $this->render('front/guests.html.twig', [
-            'guests' => $guests
+            'guests' => $guests,
         ]);
     }
 
@@ -71,7 +70,7 @@ class HomeController extends AbstractController
         }
 
         return $this->render('front/guest.html.twig', [
-            'guest' => $guest
+            'guest' => $guest,
         ]);
     }
 
@@ -79,17 +78,17 @@ class HomeController extends AbstractController
      * @Route("/portfolio/{id?}", name="portfolio")
      */
     #[Route('/portfolio/{id?}', name: 'portfolio')]
-    public function portfolio( ManagerRegistry $doctrine, MediaFilterService $mediaFilterService, ?int $id = null): Response
+    public function portfolio(ManagerRegistry $doctrine, MediaFilterService $mediaFilterService, ?int $id = null): Response
     {
         // 1. Injection des Repositories via ManagerRegistry
         $albumRepository = $doctrine->getRepository(Album::class);
-        $userRepository  = $doctrine->getRepository(User::class);
+        $userRepository = $doctrine->getRepository(User::class);
         $mediaRepository = $doctrine->getRepository(Media::class);
 
         // 2. Récupération des données
         $albums = $albumRepository->findAll();
-        $album  = $id ? $albumRepository->find($id) : null;
-        $user   = $userRepository->findOneBy(['admin' => true]);
+        $album = $id ? $albumRepository->find($id) : null;
+        $user = $userRepository->findOneBy(['admin' => true]);
 
         // 3. Récupération des médias
         if ($album) {
@@ -106,7 +105,7 @@ class HomeController extends AbstractController
         // 5. Rendu du template
         return $this->render('front/portfolio.html.twig', [
             'albums' => $albums,
-            'album'  => $album,
+            'album' => $album,
             'medias' => $medias,
         ]);
     }

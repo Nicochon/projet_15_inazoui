@@ -36,7 +36,7 @@ class GuestActivationTest extends WebTestCase
         $client->loginUser($admin);
 
         // Révoquer l'utilisateur
-        $client->request('GET', '/admin/guest/revoke/' . $user->getId());
+        $client->request('GET', '/admin/guest/revoke/'.$user->getId());
         $entityManager->refresh($user);
         $this->assertFalse($user->isActive(), 'L’utilisateur doit être inactif après révoquer');
 
@@ -75,7 +75,7 @@ class GuestActivationTest extends WebTestCase
         $client->loginUser($admin);
 
         // Activer l'utilisateur
-        $client->request('GET', '/admin/guest/activate/' . $user->getId());
+        $client->request('GET', '/admin/guest/activate/'.$user->getId());
         $entityManager->refresh($user);
         $this->assertTrue($user->isActive(), 'L’utilisateur doit être actif après activation');
 

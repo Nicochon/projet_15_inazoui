@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\Media;
 use App\Form\MediaType;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,7 +41,7 @@ class MediaController extends AbstractController
         return $this->render('admin/media/index.html.twig', [
             'medias' => $medias,
             'total' => $total,
-            'page' => $page
+            'page' => $page,
         ]);
     }
 
@@ -60,18 +59,21 @@ class MediaController extends AbstractController
 
             if (!$file) {
                 $this->addFlash('danger', 'Aucun fichier téléchargé.');
+
                 return $this->redirectToRoute('admin_media_add');
             }
 
             $mimeType = $file->getMimeType();
             if (!str_starts_with($mimeType, 'image/')) {
                 $this->addFlash('danger', 'Le fichier doit être une image.');
+
                 return $this->redirectToRoute('admin_media_add');
             }
 
             $maxSize = 2 * 1024 * 1024; // 2 Mo en octets
             if ($file->getSize() > $maxSize) {
                 $this->addFlash('danger', 'Le fichier ne doit pas dépasser 2 Mo.');
+
                 return $this->redirectToRoute('admin_media_add');
             }
 
@@ -83,22 +85,21 @@ class MediaController extends AbstractController
                 $media->setUser($user);
             }
 
-            $fileName = md5(uniqid()) . '.' . $media->getFile()->guessExtension();
-            $media->setPath('uploads/' . $fileName);
+            $fileName = md5(uniqid()).'.'.$media->getFile()->guessExtension();
+            $media->setPath('uploads/'.$fileName);
 
             $media->getFile()->move(
-                $this->getParameter('kernel.project_dir') . '/public/uploads',
+                $this->getParameter('kernel.project_dir').'/public/uploads',
                 $fileName
             );
-
 
             $entityManager->persist($media);
             $entityManager->flush();
 
-//            $media->setPath('uploads/' . md5(uniqid()) . '.' . $media->getFile()->guessExtension());
-//            $media->getFile()->move('uploads/', $media->getPath());
-//            $this->getDoctrine()->getManager()->persist($media);
-//            $this->getDoctrine()->getManager()->flush();
+            //            $media->setPath('uploads/' . md5(uniqid()) . '.' . $media->getFile()->guessExtension());
+            //            $media->getFile()->move('uploads/', $media->getPath());
+            //            $this->getDoctrine()->getManager()->persist($media);
+            //            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_media_index');
         }

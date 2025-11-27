@@ -55,6 +55,20 @@ Des test ont été implémantés dans le projet, ils couvrent actuellement 72% d
 ```bash 
 vendor/bin/phpunit --coverage-html public/test-coverage
 ```
+
+## phpStan
+commande pour lancer phpStan:
+```bash 
+vendor/bin/phpstan analyse src
+```
+
+## php fixer
+lancer un controle:
+vendor/bin/php-cs-fixer fix --dry-run --diff
+
+corriger
+vendor/bin/php-cs-fixer fix
+
 ### Lancer tous les tests
 ```bash 
 vendor/bin/phpunit 

@@ -24,7 +24,7 @@ class FrontGuestTest extends WebTestCase
         $entityManager->flush();
 
         // Accéder à la page guest/{id}
-        $crawler = $client->request('GET', '/guest/' . $guest->getId());
+        $crawler = $client->request('GET', '/guest/'.$guest->getId());
 
         // Vérifier que la réponse est 200 OK
         $this->assertResponseIsSuccessful();
@@ -48,7 +48,7 @@ class FrontGuestTest extends WebTestCase
         $nonExistentId = 999999;
 
         // Accéder à la page guest/{id}
-        $client->request('GET', '/guest/' . $nonExistentId);
+        $client->request('GET', '/guest/'.$nonExistentId);
 
         // Vérifier que la page renvoie 404
         $this->assertResponseStatusCodeSame(404);

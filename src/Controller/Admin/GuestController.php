@@ -2,11 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Album;
-use App\Entity\Media;
 use App\Entity\User;
-use App\Form\AlbumType;
-use App\Form\MediaType;
 use App\Form\UserType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +21,7 @@ class GuestController extends AbstractController
         $guests = $doctrine->getRepository(User::class)->findAll();
 
         return $this->render('admin/guests/index.html.twig', [
-            'guests' => $guests
+            'guests' => $guests,
         ]);
     }
 
@@ -85,6 +81,7 @@ class GuestController extends AbstractController
         $doctrine->getManager()->flush();
 
         $this->addFlash('warning', "L’accès de {$user->getName()} a été révoqué.");
+
         return $this->redirectToRoute('admin_guest_index');
     }
 
@@ -96,6 +93,7 @@ class GuestController extends AbstractController
         $doctrine->getManager()->flush();
 
         $this->addFlash('success', "L’accès de {$user->getName()} a été réactivé.");
+
         return $this->redirectToRoute('admin_guest_index');
     }
 }

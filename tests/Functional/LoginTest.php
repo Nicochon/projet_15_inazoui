@@ -33,7 +33,6 @@ class LoginTest extends WebTestCase
 
         // Vérifier que la page est chargée
         $this->assertResponseIsSuccessful();
-
     }
 
     public function testLoginWithNonExistingUser(): void
@@ -93,5 +92,4 @@ class LoginTest extends WebTestCase
         $entityManager->remove($inactiveUser);
         $entityManager->flush();
     }
-
 }
