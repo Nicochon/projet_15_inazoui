@@ -30,19 +30,33 @@ jobs:
       DATABASE_URL: "mysql://root:root@127.0.0.1:3306/symfony_test"
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
           extensions: mbstring, intl, pdo_mysql
+          coverage: none
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist
 
-      - name: Create Database
-        run: php bin/console doctrine:database:create --if-not-exists --env=test
+      # ✅ Ici on vérifie que les fichiers de tests sont bien présents
+      - name: Lister les tests
+        run: ls -R tests
+
+      - name: Create test database
+        run: |
+          php bin/console doctrine:database:create --env=test --if-not-exists
+          php bin/console doctrine:schema:create --env=test
+
+      - name: Load fixtures
+        run: php bin/console doctrine:fixtures:load --env=test --no-interaction
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist
 
       - name: Run Migrations
         run: php bin/console doctrine:migrations:migrate --no-interaction --env=test
