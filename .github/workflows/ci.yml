@@ -17,7 +17,7 @@ jobs:
         image: mariadb:10
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: symfony
+          MYSQL_DATABASE: symfony_test
         ports:
           - 3306:3306
         options: >-
@@ -38,28 +38,20 @@ jobs:
         with:
           php-version: 8.2
           extensions: mbstring, intl, pdo_mysql
-          coverage: none
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist
 
-      # ✅ Ici on vérifie que les fichiers de tests sont bien présents
       - name: Lister les tests
         run: ls -R tests
 
-      - name: Create test database
+      - name: Create test database and schema
         run: |
           php bin/console doctrine:database:create --env=test --if-not-exists
           php bin/console doctrine:schema:create --env=test
 
       - name: Load fixtures
         run: php bin/console doctrine:fixtures:load --env=test --no-interaction
-
-      - name: Install Composer dependencies
-        run: composer install --no-interaction --prefer-dist
-
-      - name: Run Migrations
-        run: php bin/console doctrine:migrations:migrate --no-interaction --env=test
 
       - name: Run Tests
         run: APP_ENV=test vendor/bin/phpunit
