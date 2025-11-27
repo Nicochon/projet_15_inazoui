@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\Album;
 use App\Entity\Media;
 use App\Entity\User;
+use App\Service\MediaFilterService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 use App\Repository\UserRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -63,6 +65,11 @@ class HomeController extends AbstractController
     public function guest(int $id, ManagerRegistry $doctrine)
     {
         $guest = $doctrine->getRepository(User::class)->find($id);
+
+        if (!$guest) {
+            throw $this->createNotFoundException('Utilisateur introuvable');
+        }
+
         return $this->render('front/guest.html.twig', [
             'guest' => $guest
         ]);
@@ -72,7 +79,7 @@ class HomeController extends AbstractController
      * @Route("/portfolio/{id?}", name="portfolio")
      */
     #[Route('/portfolio/{id?}', name: 'portfolio')]
-    public function portfolio(?int $id = null, ManagerRegistry $doctrine): Response
+    public function portfolio( ManagerRegistry $doctrine, MediaFilterService $mediaFilterService, ?int $id = null): Response
     {
         // 1. Injection des Repositories via ManagerRegistry
         $albumRepository = $doctrine->getRepository(Album::class);
@@ -94,10 +101,7 @@ class HomeController extends AbstractController
         }
 
         // Filtrer les médias : ne garder que ceux dont l'utilisateur est actif
-        $medias = array_filter($medias, function ($media) {
-            $user = $media->getUser();
-            return $user && $user->isActive(); // Seuls les utilisateurs actifs
-        });
+        $medias = $mediaFilterService->filterActiveUsers($medias);
 
         // 5. Rendu du template
         return $this->render('front/portfolio.html.twig', [

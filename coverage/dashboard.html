@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css?v=9.2.31" rel="stylesheet" type="text/css">
+  <link href="_css/nv.d3.min.css?v=9.2.31" rel="stylesheet" type="text/css">
+  <link href="_css/style.css?v=9.2.31" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">/var/www/html/src</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="DataFixtures/AlbumFixtures.php.html#9">App\DataFixtures\AlbumFixtures</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/AppFixtures.php.html#8">App\DataFixtures\AppFixtures</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/MediaFixtures.php.html#12">App\DataFixtures\MediaFixtures</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/UserFixtures.php.html#10">App\DataFixtures\UserFixtures</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#22">App\Repository\UserRepository</a></td><td class="text-right">16%</td></tr>
+       <tr><td><a href="Controller/Admin/AlbumController.php.html#14">App\Controller\Admin\AlbumController</a></td><td class="text-right">42%</td></tr>
+       <tr><td><a href="Security/UserActiveChecker.php.html#9">App\Security\UserActiveChecker</a></td><td class="text-right">42%</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#19">App\Controller\HomeController</a></td><td class="text-right">70%</td></tr>
+       <tr><td><a href="Controller/Admin/GuestController.php.html#18">App\Controller\Admin\GuestController</a></td><td class="text-right">71%</td></tr>
+       <tr><td><a href="Controller/Admin/MediaController.php.html#13">App\Controller\Admin\MediaController</a></td><td class="text-right">73%</td></tr>
+       <tr><td><a href="Controller/Admin/SecurityController.php.html#9">App\Controller\Admin\SecurityController</a></td><td class="text-right">85%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="DataFixtures/MediaFixtures.php.html#12">App\DataFixtures\MediaFixtures</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/Admin/AlbumController.php.html#14">App\Controller\Admin\AlbumController</a></td><td class="text-right">19</td></tr>
+       <tr><td><a href="DataFixtures/UserFixtures.php.html#10">App\DataFixtures\UserFixtures</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/Admin/MediaController.php.html#13">App\Controller\Admin\MediaController</a></td><td class="text-right">11</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#19">App\Controller\HomeController</a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Controller/Admin/GuestController.php.html#18">App\Controller\Admin\GuestController</a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#22">App\Repository\UserRepository</a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="Security/UserActiveChecker.php.html#9">App\Security\UserActiveChecker</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DataFixtures/AlbumFixtures.php.html#9">App\DataFixtures\AlbumFixtures</a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controller/Admin/AlbumController.php.html#29"><abbr title="App\Controller\Admin\AlbumController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Admin/AlbumController.php.html#66"><abbr title="App\Controller\Admin\AlbumController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Admin/GuestController.php.html#23"><abbr title="App\Controller\Admin\GuestController::guests">guests</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Admin/GuestController.php.html#66"><abbr title="App\Controller\Admin\GuestController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Admin/MediaController.php.html#102"><abbr title="App\Controller\Admin\MediaController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Admin/SecurityController.php.html#27"><abbr title="App\Controller\Admin\SecurityController::logout">logout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#54"><abbr title="App\Controller\HomeController::guests">guests</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#112"><abbr title="App\Controller\HomeController::about">about</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/AlbumFixtures.php.html#11"><abbr title="App\DataFixtures\AlbumFixtures::load">load</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/AppFixtures.php.html#10"><abbr title="App\DataFixtures\AppFixtures::load">load</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/MediaFixtures.php.html#14"><abbr title="App\DataFixtures\MediaFixtures::load">load</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/MediaFixtures.php.html#36"><abbr title="App\DataFixtures\MediaFixtures::getDependencies">getDependencies</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/UserFixtures.php.html#14"><abbr title="App\DataFixtures\UserFixtures::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/UserFixtures.php.html#19"><abbr title="App\DataFixtures\UserFixtures::load">load</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#93"><abbr title="App\Entity\User::setMedias">setMedias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#103"><abbr title="App\Entity\User::setAdmin">setAdmin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#32"><abbr title="App\Repository\UserRepository::upgradePassword">upgradePassword</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Security/UserActiveChecker.php.html#11"><abbr title="App\Security\UserActiveChecker::checkPreAuth">checkPreAuth</abbr></a></td><td class="text-right">33%</td></tr>
+       <tr><td><a href="Controller/Admin/MediaController.php.html#46"><abbr title="App\Controller\Admin\MediaController::add">add</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#76"><abbr title="App\Controller\HomeController::portfolio">portfolio</abbr></a></td><td class="text-right">82%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controller/Admin/AlbumController.php.html#29"><abbr title="App\Controller\Admin\AlbumController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="DataFixtures/MediaFixtures.php.html#14"><abbr title="App\DataFixtures\MediaFixtures::load">load</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/Admin/MediaController.php.html#46"><abbr title="App\Controller\Admin\MediaController::add">add</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="DataFixtures/AlbumFixtures.php.html#11"><abbr title="App\DataFixtures\AlbumFixtures::load">load</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DataFixtures/UserFixtures.php.html#19"><abbr title="App\DataFixtures\UserFixtures::load">load</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#32"><abbr title="App\Repository\UserRepository::upgradePassword">upgradePassword</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Security/UserActiveChecker.php.html#11"><abbr title="App\Security\UserActiveChecker::checkPreAuth">checkPreAuth</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#76"><abbr title="App\Controller\HomeController::portfolio">portfolio</abbr></a></td><td class="text-right">4</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 9.2.31</a> using <a href="https://secure.php.net/" target="_top">PHP 8.2.25</a> and <a href="https://phpunit.de/">PHPUnit 9.6.19</a> at Thu Nov 20 17:57:53 CET 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/jquery.min.js?v=9.2.31" type="text/javascript"></script>
+  <script src="_js/d3.min.js?v=9.2.31" type="text/javascript"></script>
+  <script src="_js/nv.d3.min.js?v=9.2.31" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([4,0,1,0,0,2,0,0,3,1,1,9], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([17,0,0,0,1,0,0,0,1,1,2,50], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[42.857142857142854,8,"<a href=\"Controller\/Admin\/AlbumController.php.html#14\">App\\Controller\\Admin\\AlbumController<\/a>"],[71.7948717948718,8,"<a href=\"Controller\/Admin\/GuestController.php.html#18\">App\\Controller\\Admin\\GuestController<\/a>"],[73.46938775510205,10,"<a href=\"Controller\/Admin\/MediaController.php.html#13\">App\\Controller\\Admin\\MediaController<\/a>"],[85.71428571428571,2,"<a href=\"Controller\/Admin\/SecurityController.php.html#9\">App\\Controller\\Admin\\SecurityController<\/a>"],[70.37037037037037,8,"<a href=\"Controller\/HomeController.php.html#19\">App\\Controller\\HomeController<\/a>"],[0,2,"<a href=\"DataFixtures\/AlbumFixtures.php.html#9\">App\\DataFixtures\\AlbumFixtures<\/a>"],[0,1,"<a href=\"DataFixtures\/AppFixtures.php.html#8\">App\\DataFixtures\\AppFixtures<\/a>"],[0,4,"<a href=\"DataFixtures\/MediaFixtures.php.html#12\">App\\DataFixtures\\MediaFixtures<\/a>"],[0,3,"<a href=\"DataFixtures\/UserFixtures.php.html#10\">App\\DataFixtures\\UserFixtures<\/a>"],[100,3,"<a href=\"Entity\/Album.php.html#8\">App\\Entity\\Album<\/a>"],[100,11,"<a href=\"Entity\/Media.php.html#9\">App\\Entity\\Media<\/a>"],[92.3076923076923,20,"<a href=\"Entity\/User.php.html#12\">App\\Entity\\User<\/a>"],[100,2,"<a href=\"Form\/AlbumType.php.html#11\">App\\Form\\AlbumType<\/a>"],[100,3,"<a href=\"Form\/MediaType.php.html#15\">App\\Form\\MediaType<\/a>"],[100,2,"<a href=\"Form\/UserType.php.html#13\">App\\Form\\UserType<\/a>"],[100,0,"<a href=\"Kernel.php.html#8\">App\\Kernel<\/a>"],[100,1,"<a href=\"Repository\/AlbumRepository.php.html#17\">App\\Repository\\AlbumRepository<\/a>"],[100,1,"<a href=\"Repository\/MediaRepository.php.html#17\">App\\Repository\\MediaRepository<\/a>"],[16.666666666666664,3,"<a href=\"Repository\/UserRepository.php.html#22\">App\\Repository\\UserRepository<\/a>"],[42.857142857142854,4,"<a href=\"Security\/UserActiveChecker.php.html#9\">App\\Security\\UserActiveChecker<\/a>"],[100,2,"<a href=\"Service\/MediaFilterService.php.html#7\">App\\Service\\MediaFilterService<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"Controller\/Admin\/AlbumController.php.html#19\">App\\Controller\\Admin\\AlbumController::index<\/a>"],[0,3,"<a href=\"Controller\/Admin\/AlbumController.php.html#29\">App\\Controller\\Admin\\AlbumController::add<\/a>"],[100,3,"<a href=\"Controller\/Admin\/AlbumController.php.html#48\">App\\Controller\\Admin\\AlbumController::update<\/a>"],[0,1,"<a href=\"Controller\/Admin\/AlbumController.php.html#66\">App\\Controller\\Admin\\AlbumController::delete<\/a>"],[0,1,"<a href=\"Controller\/Admin\/GuestController.php.html#23\">App\\Controller\\Admin\\GuestController::guests<\/a>"],[94.73684210526315,4,"<a href=\"Controller\/Admin\/GuestController.php.html#35\">App\\Controller\\Admin\\GuestController::add<\/a>"],[0,1,"<a href=\"Controller\/Admin\/GuestController.php.html#66\">App\\Controller\\Admin\\GuestController::delete<\/a>"],[100,1,"<a href=\"Controller\/Admin\/GuestController.php.html#80\">App\\Controller\\Admin\\GuestController::revoke<\/a>"],[100,1,"<a href=\"Controller\/Admin\/GuestController.php.html#91\">App\\Controller\\Admin\\GuestController::activate<\/a>"],[93.75,2,"<a href=\"Controller\/Admin\/MediaController.php.html#18\">App\\Controller\\Admin\\MediaController::index<\/a>"],[75,7,"<a href=\"Controller\/Admin\/MediaController.php.html#46\">App\\Controller\\Admin\\MediaController::add<\/a>"],[0,1,"<a href=\"Controller\/Admin\/MediaController.php.html#102\">App\\Controller\\Admin\\MediaController::delete<\/a>"],[100,1,"<a href=\"Controller\/Admin\/SecurityController.php.html#14\">App\\Controller\\Admin\\SecurityController::login<\/a>"],[0,1,"<a href=\"Controller\/Admin\/SecurityController.php.html#27\">App\\Controller\\Admin\\SecurityController::logout<\/a>"],[100,1,"<a href=\"Controller\/HomeController.php.html#24\">App\\Controller\\HomeController::home<\/a>"],[0,1,"<a href=\"Controller\/HomeController.php.html#54\">App\\Controller\\HomeController::guests<\/a>"],[100,1,"<a href=\"Controller\/HomeController.php.html#65\">App\\Controller\\HomeController::guest<\/a>"],[82.35294117647058,4,"<a href=\"Controller\/HomeController.php.html#76\">App\\Controller\\HomeController::portfolio<\/a>"],[0,1,"<a href=\"Controller\/HomeController.php.html#112\">App\\Controller\\HomeController::about<\/a>"],[0,2,"<a href=\"DataFixtures\/AlbumFixtures.php.html#11\">App\\DataFixtures\\AlbumFixtures::load<\/a>"],[0,1,"<a href=\"DataFixtures\/AppFixtures.php.html#10\">App\\DataFixtures\\AppFixtures::load<\/a>"],[0,3,"<a href=\"DataFixtures\/MediaFixtures.php.html#14\">App\\DataFixtures\\MediaFixtures::load<\/a>"],[0,1,"<a href=\"DataFixtures\/MediaFixtures.php.html#36\">App\\DataFixtures\\MediaFixtures::getDependencies<\/a>"],[0,1,"<a href=\"DataFixtures\/UserFixtures.php.html#14\">App\\DataFixtures\\UserFixtures::__construct<\/a>"],[0,2,"<a href=\"DataFixtures\/UserFixtures.php.html#19\">App\\DataFixtures\\UserFixtures::load<\/a>"],[100,1,"<a href=\"Entity\/Album.php.html#19\">App\\Entity\\Album::getId<\/a>"],[100,1,"<a href=\"Entity\/Album.php.html#24\">App\\Entity\\Album::getName<\/a>"],[100,1,"<a href=\"Entity\/Album.php.html#29\">App\\Entity\\Album::setName<\/a>"],[100,1,"<a href=\"Entity\/Media.php.html#31\">App\\Entity\\Media::getId<\/a>"],[100,1,"<a href=\"Entity\/Media.php.html#36\">App\\Entity\\Media::getUser<\/a>"],[100,1,"<a href=\"Entity\/Media.php.html#41\">App\\Entity\\Media::setUser<\/a>"],[100,1,"<a href=\"Entity\/Media.php.html#46\">App\\Entity\\Media::getPath<\/a>"],[100,1,"<a href=\"Entity\/Media.php.html#51\">App\\Entity\\Media::setPath<\/a>"],[100,1,"<a href=\"Entity\/Media.php.html#56\">App\\Entity\\Media::getTitle<\/a>"],[100,1,"<a href=\"Entity\/Media.php.html#61\">App\\Entity\\Media::setTitle<\/a>"],[100,1,"<a href=\"Entity\/Media.php.html#66\">App\\Entity\\Media::getFile<\/a>"],[100,1,"<a href=\"Entity\/Media.php.html#71\">App\\Entity\\Media::setFile<\/a>"],[100,1,"<a href=\"Entity\/Media.php.html#76\">App\\Entity\\Media::getAlbum<\/a>"],[100,1,"<a href=\"Entity\/Media.php.html#81\">App\\Entity\\Media::setAlbum<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#46\">App\\Entity\\User::__construct<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#51\">App\\Entity\\User::getId<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#56\">App\\Entity\\User::getEmail<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#61\">App\\Entity\\User::setEmail<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#68\">App\\Entity\\User::getName<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#73\">App\\Entity\\User::setName<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#78\">App\\Entity\\User::getDescription<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#83\">App\\Entity\\User::setDescription<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#88\">App\\Entity\\User::getMedias<\/a>"],[0,1,"<a href=\"Entity\/User.php.html#93\">App\\Entity\\User::setMedias<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#98\">App\\Entity\\User::isAdmin<\/a>"],[0,1,"<a href=\"Entity\/User.php.html#103\">App\\Entity\\User::setAdmin<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#108\">App\\Entity\\User::getPassword<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#113\">App\\Entity\\User::setPassword<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#120\">App\\Entity\\User::getRoles<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#127\">App\\Entity\\User::setRoles<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#133\">App\\Entity\\User::eraseCredentials<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#138\">App\\Entity\\User::getUserIdentifier<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#143\">App\\Entity\\User::isActive<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#148\">App\\Entity\\User::setActive<\/a>"],[100,1,"<a href=\"Form\/AlbumType.php.html#13\">App\\Form\\AlbumType::buildForm<\/a>"],[100,1,"<a href=\"Form\/AlbumType.php.html#20\">App\\Form\\AlbumType::configureOptions<\/a>"],[100,2,"<a href=\"Form\/MediaType.php.html#17\">App\\Form\\MediaType::buildForm<\/a>"],[100,1,"<a href=\"Form\/MediaType.php.html#46\">App\\Form\\MediaType::configureOptions<\/a>"],[100,1,"<a href=\"Form\/UserType.php.html#15\">App\\Form\\UserType::buildForm<\/a>"],[100,1,"<a href=\"Form\/UserType.php.html#37\">App\\Form\\UserType::configureOptions<\/a>"],[100,1,"<a href=\"Repository\/AlbumRepository.php.html#19\">App\\Repository\\AlbumRepository::__construct<\/a>"],[100,1,"<a href=\"Repository\/MediaRepository.php.html#19\">App\\Repository\\MediaRepository::__construct<\/a>"],[100,1,"<a href=\"Repository\/UserRepository.php.html#24\">App\\Repository\\UserRepository::__construct<\/a>"],[0,2,"<a href=\"Repository\/UserRepository.php.html#32\">App\\Repository\\UserRepository::upgradePassword<\/a>"],[33.33333333333333,3,"<a href=\"Security\/UserActiveChecker.php.html#11\">App\\Security\\UserActiveChecker::checkPreAuth<\/a>"],[100,1,"<a href=\"Security\/UserActiveChecker.php.html#26\">App\\Security\\UserActiveChecker::checkPostAuth<\/a>"],[100,2,"<a href=\"Service\/MediaFilterService.php.html#14\">App\\Service\\MediaFilterService::filterActiveUsers<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
