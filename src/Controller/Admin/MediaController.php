@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MediaController extends AbstractController
@@ -15,7 +16,7 @@ class MediaController extends AbstractController
     /**
      * @Route("/admin/media", name="admin_media_index")
      */
-    public function index(Request $request, ManagerRegistry $doctrine)
+    public function index(Request $request, EntityManagerInterface $em): Response
     {
         $page = $request->query->getInt('page', 1);
 
@@ -25,13 +26,18 @@ class MediaController extends AbstractController
             $criteria['user'] = $this->getUser();
         }
 
-        $medias = $doctrine->getRepository(Media::class)->findBy(
+        $medias = $em->getRepository(Media::class)->findBy(
             $criteria,
             ['id' => 'ASC'],
             25,
             25 * ($page - 1)
         );
-        $total = $doctrine->getRepository(Media::class)->count([]);
+
+        $total = (int) $em->createQueryBuilder()
+            ->select('COUNT(m.id)')
+            ->from(Media::class, 'm')
+            ->getQuery()
+            ->getSingleScalarResult();
 
         return $this->render('admin/media/index.html.twig', [
             'medias' => $medias,
@@ -43,7 +49,7 @@ class MediaController extends AbstractController
     /**
      * @Route("/admin/media/add", name="admin_media_add")
      */
-    public function add(Request $request, EntityManagerInterface $entityManager)
+    public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
         $media = new Media();
         $form = $this->createForm(MediaType::class, $media, ['is_admin' => $this->isGranted('ROLE_ADMIN')]);
@@ -70,7 +76,11 @@ class MediaController extends AbstractController
             }
 
             if (!$this->isGranted('ROLE_ADMIN')) {
-                $media->setUser($this->getUser());
+                $user = $this->getUser();
+                if (!$user instanceof \App\Entity\User) {
+                    throw new \LogicException('Utilisateur invalide.');
+                }
+                $media->setUser($user);
             }
 
             $fileName = md5(uniqid()) . '.' . $media->getFile()->guessExtension();
@@ -99,12 +109,20 @@ class MediaController extends AbstractController
     /**
      * @Route("/admin/media/delete/{id}", name="admin_media_delete")
      */
-    public function delete(int $id)
+    public function delete(int $id, EntityManagerInterface $em): Response
     {
-        $media = $this->getDoctrine()->getRepository(Media::class)->find($id);
-        $this->getDoctrine()->getManager()->remove($media);
-        $this->getDoctrine()->getManager()->flush();
-        unlink($media->getPath());
+        $media = $em->getRepository(Media::class)->find($id);
+
+        if (!$media) {
+            throw $this->createNotFoundException('Media not found.');
+        }
+
+        $em->remove($media);
+        $em->flush();
+
+        if (file_exists($media->getPath())) {
+            unlink($media->getPath());
+        }
 
         return $this->redirectToRoute('admin_media_index');
     }

@@ -20,7 +20,7 @@ class GuestController extends AbstractController
     /**
      * @Route("admin/guests", name="admin_guest_index")
      */
-    public function guests(ManagerRegistry $doctrine)
+    public function guests(ManagerRegistry $doctrine): Response
     {
         $guests = $doctrine->getRepository(User::class)->findAll();
 
@@ -32,7 +32,7 @@ class GuestController extends AbstractController
     /**
      * @Route("/admin/guest/add", name="admin_guest_add")
      */
-    public function add(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher)
+    public function add(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -78,7 +78,7 @@ class GuestController extends AbstractController
     }
 
     #[Route('/admin/guest/revoke/{id}', name: 'admin_guest_revoke')]
-    public function revoke(User $user, ManagerRegistry $doctrine)
+    public function revoke(User $user, ManagerRegistry $doctrine): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $user->setActive(false);
@@ -89,7 +89,7 @@ class GuestController extends AbstractController
     }
 
     #[Route('/admin/guest/activate/{id}', name: 'admin_guest_activate')]
-    public function activate(User $user, ManagerRegistry $doctrine)
+    public function activate(User $user, ManagerRegistry $doctrine): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $user->setActive(true);

@@ -21,7 +21,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager)
+    public function home(UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
 //        $email = 'ina@zaoui.com';
 //
@@ -51,7 +51,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/guests", name="guests")
      */
-    public function guests(ManagerRegistry $doctrine)
+    public function guests(ManagerRegistry $doctrine): Response
     {
         $guests = $doctrine->getRepository(User::class)->findBy(['admin' => false]);
         return $this->render('front/guests.html.twig', [
@@ -62,7 +62,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/guest/{id}", name="guest")
      */
-    public function guest(int $id, ManagerRegistry $doctrine)
+    public function guest(int $id, ManagerRegistry $doctrine): Response
     {
         $guest = $doctrine->getRepository(User::class)->find($id);
 
@@ -114,7 +114,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/about", name="about")
      */
-    public function about()
+    public function about(): Response
     {
         return $this->render('front/about.html.twig');
     }
