@@ -2,6 +2,8 @@
 photographe spécialisée dans les photos de paysages du monde entier.
 Ce projet est une application web permettant de gérer et présenter les photos de manière organisée.
 
+---
+
 ## Pré-requis
 Avant de commencer, assurez-vous d’avoir installé sur votre machine :
 - PHP >= 8.1
@@ -9,6 +11,8 @@ Avant de commencer, assurez-vous d’avoir installé sur votre machine :
 - Symfony CLI
 - MySQL / MariaDB
 - Docker & Docker Compose (optionnel, si utilisé)
+
+---
 
 ## Installation
 ### Clonez le dépôt :
@@ -34,6 +38,8 @@ Vous pouvez importer votre base de données grace au fichier suivant:
 symfony serve 
 ```
 
+---
+
 ## Usage:
 ### Accès à administrateur
 **Administrateur** | admin@inazoui.com | password 
@@ -48,6 +54,7 @@ symfony serve
 php bin/console  debug:router 
 ```
 
+---
 
 ## Utilisation des tests
 Des test ont été implémantés dans le projet, ils couvrent actuellement 72% des lignes de ce projet.
@@ -55,20 +62,6 @@ Des test ont été implémantés dans le projet, ils couvrent actuellement 72% d
 ```bash 
 vendor/bin/phpunit --coverage-html public/test-coverage
 ```
-
-## phpStan
-commande pour lancer phpStan:
-```bash 
-vendor/bin/phpstan analyse src
-```
-
-## php fixer
-lancer un controle:
-vendor/bin/php-cs-fixer fix --dry-run --diff
-
-corriger
-vendor/bin/php-cs-fixer fix
-
 ### Lancer tous les tests
 ```bash 
 vendor/bin/phpunit 
@@ -78,15 +71,29 @@ vendor/bin/phpunit
 vendor/bin/phpunit tests/DossierDeTest/fichierDeTest.php
 ```
 
-## Amélioration
-### Accéder à l'admin:
-Pas de page home dans l'admin. il faut y accéder directement dans l'url.
-### Création de compte
-Les utilisateurs ne peuvent pas créer de compte.
-### Possibilité à l'admin de modifier un utilisateur. 
-Actuellement l'utilisateur admin ne peut pas modifier un utilisateur. 
+---
 
+## PhpStan
+### Annalyse:
+```bash 
+vendor/bin/phpstan analyse src
+```
 
+---
 
-Vous trouverez dans le fichier `backup.zip` un dump SQL anonymisé de la base de données et toutes les images qui se trouvaient dans le dossier `public/uploads`.
-Faudrait peut être trouver une meilleure solution car le fichier est très gros, il fait plus de 1Go.
+## Php fixer
+### Controle:
+```bash 
+vendor/bin/php-cs-fixer fix --dry-run --diff
+```
+### Correction
+```bash 
+vendor/bin/php-cs-fixer fix
+```
+
+---
+
+structure du projet 
+fonctionnalité principale
+stack technique 
+partie de contribution 
