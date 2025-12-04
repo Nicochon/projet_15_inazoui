@@ -3,10 +3,11 @@
 namespace App\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 class LoginTest extends WebTestCase
 {
-    private $client;
+    private KernelBrowser $client;
 
     protected function setUp(): void
     {

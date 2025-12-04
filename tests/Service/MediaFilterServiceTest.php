@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class MediaFilterServiceTest extends TestCase
 {
-    public function testFilterActiveUsers()
+    public function testFilterActiveUsers(): void
     {
         $service = new MediaFilterService();
 
