@@ -4,6 +4,7 @@ when@dev:
         intercept_redirects: false
 
     framework:
+
         profiler: { only_exceptions: false }
 
 when@test:

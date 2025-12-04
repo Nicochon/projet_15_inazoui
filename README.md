@@ -53,6 +53,13 @@ symfony serve
 ```bash 
 php bin/console  debug:router 
 ```
+### Fonctionnalités principales
+- Albums photo: Création, édition et affichage d'album
+- Invités: Possibilité d'ajouter des guest qui peuvent uploader leurs photos
+- Gestion des médias: upload, stockage et affichage des images.
+- Authentification: Espace sécurisé pour l'utilisateur.
+- Interface intuitive: Design épuré et responsive.
+- Administration: Gestion des utilisateurs, albums et contributions.
 
 ---
 
@@ -93,7 +100,36 @@ vendor/bin/php-cs-fixer fix
 
 ---
 
-structure du projet 
-fonctionnalité principale
-stack technique 
-partie de contribution 
+## structure du projet 
+
+876-p15-inazaoui/
+│
+├── .github/               
+├── config/                
+├── migrations/            
+├── public/
+    ├── images/
+    ├── test-coverage/
+    ├── uploads/
+├── src/     
+    ├── Controller/
+        ├── Admin/
+    ├── DataFixture/
+    ├── Entity/
+    ├── Form/
+    ├── Repository/
+    ├── security/
+    ├── service/
+├── templates/            
+    ├── admin/            
+    ├── front/          
+├── tests/
+    ├── Functional/
+    ├── Service/
+├── var/
+
+---
+
+## Contribuer 
+Les conditions sont les bienvenues !
+Merci de lire [CONTRIBUTING.md](CONTRIBUTING.md) pour connaitre le workflow de contribution, les bonnes pratiques Git et les normes de code a suivre.

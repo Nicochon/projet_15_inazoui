@@ -10,6 +10,7 @@ use App\Service\MediaFilterService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,13 +50,44 @@ class HomeController extends AbstractController
     /**
      * @Route("/guests", name="guests")
      */
-    public function guests(ManagerRegistry $doctrine): Response
+    public function guests(ManagerRegistry $doctrine, Request $request): Response
     {
-        $guests = $doctrine->getRepository(User::class)->findBy(['admin' => false]);
+        $page = $request->query->getInt('page', 1);
+        $limit = 20; // nombre de guests par page
+        $offset = ($page - 1) * $limit;
+
+        $qb = $doctrine->getRepository(User::class)
+            ->createQueryBuilder('u')
+            ->select('u.id, u.name, COUNT(m.id) AS mediaCount')
+            ->leftJoin('u.medias', 'm')
+            ->where('u.admin = :admin')
+            ->setParameter('admin', false)
+            ->groupBy('u.id')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        $guests = $qb->getQuery()->getArrayResult();
+
+        $total = (int) $doctrine->getRepository(User::class)
+            ->createQueryBuilder('u')
+            ->select('COUNT(u.id)')
+            ->where('u.admin = :admin')
+            ->setParameter('admin', false)
+            ->getQuery()
+            ->getSingleScalarResult();
 
         return $this->render('front/guests.html.twig', [
             'guests' => $guests,
+            'page' => $page,
+            'limit' => $limit,
+            'total' => $total,
         ]);
+
+//        $guests = $doctrine->getRepository(User::class)->findBy(['admin' => false]);
+//
+//        return $this->render('front/guests.html.twig', [
+//            'guests' => $guests,
+//        ]);
     }
 
     /**
@@ -101,6 +133,8 @@ class HomeController extends AbstractController
 
         // Filtrer les médias : ne garder que ceux dont l'utilisateur est actif
         $medias = $mediaFilterService->filterActiveUsers($medias);
+
+
 
         // 5. Rendu du template
         return $this->render('front/portfolio.html.twig', [
