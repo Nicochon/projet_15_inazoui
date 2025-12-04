@@ -44,7 +44,7 @@ jobs:
 
       # --- 4. Vérification PHPStan ---
       - name: Run PHPStan
-        run: vendor/bin/phpstan analyse --memory-limit=1G
+        run: vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=1G
 
       # --- 5. Vérification PHP CS Fixer ---
       # Dry-run = remonte les erreurs sans modifier les fichiers
