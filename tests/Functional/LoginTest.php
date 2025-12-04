@@ -2,8 +2,8 @@
 
 namespace App\Tests\Functional;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class LoginTest extends WebTestCase
 {
