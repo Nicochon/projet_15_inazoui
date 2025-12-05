@@ -3,12 +3,14 @@
 namespace App\Tests\Functional;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AdminAddUserTest extends WebTestCase
 {
-    private $client;
-    private $em;
+    private KernelBrowser $client;
+    private EntityManagerInterface $em;
 
     protected function setUp(): void
     {
@@ -67,8 +69,7 @@ class AdminAddUserTest extends WebTestCase
 
     protected function tearDown(): void
     {
-        parent::tearDown();
         $this->em->close();
-        $this->em = null; // éviter les problèmes de mémoire
+        parent::tearDown(); // éviter les problèmes de mémoire
     }
 }

@@ -56,8 +56,10 @@ class HomeController extends AbstractController
         $limit = 20; // nombre de guests par page
         $offset = ($page - 1) * $limit;
 
-        $qb = $doctrine->getRepository(User::class)
-            ->createQueryBuilder('u')
+        /** @var UserRepository $userRepository */
+        $userRepository = $doctrine->getRepository(User::class);
+
+        $qb = $userRepository->createQueryBuilder('u')
             ->select('u.id, u.name, COUNT(m.id) AS mediaCount')
             ->leftJoin('u.medias', 'm')
             ->where('u.admin = :admin')
@@ -68,8 +70,7 @@ class HomeController extends AbstractController
 
         $guests = $qb->getQuery()->getArrayResult();
 
-        $total = (int) $doctrine->getRepository(User::class)
-            ->createQueryBuilder('u')
+        $total = $userRepository->createQueryBuilder('u')
             ->select('COUNT(u.id)')
             ->where('u.admin = :admin')
             ->setParameter('admin', false)
@@ -82,12 +83,6 @@ class HomeController extends AbstractController
             'limit' => $limit,
             'total' => $total,
         ]);
-
-//        $guests = $doctrine->getRepository(User::class)->findBy(['admin' => false]);
-//
-//        return $this->render('front/guests.html.twig', [
-//            'guests' => $guests,
-//        ]);
     }
 
     /**
@@ -133,8 +128,6 @@ class HomeController extends AbstractController
 
         // Filtrer les médias : ne garder que ceux dont l'utilisateur est actif
         $medias = $mediaFilterService->filterActiveUsers($medias);
-
-
 
         // 5. Rendu du template
         return $this->render('front/portfolio.html.twig', [
