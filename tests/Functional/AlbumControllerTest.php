@@ -113,4 +113,54 @@ class AlbumControllerTest extends WebTestCase
 
         $em->flush();
     }
+
+    public function testDeleteAlbum(): void
+    {
+        require_once __DIR__ . '/../../src/Controller/Admin/AlbumController.php';
+        $client = static::createClient();
+        $em = $client->getContainer()->get('doctrine')->getManager();
+
+        // 1. Création d'un utilisateur admin
+        $admin = new User();
+        $admin->setName('Admin Test');
+        $admin->setEmail('admin'.uniqid().'@test.com');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setActive(true);
+        $admin->setPassword(password_hash('password', PASSWORD_BCRYPT));
+        $em->persist($admin);
+        $em->flush();
+
+        // Connexion de l'utilisateur
+        $client->loginUser($admin);
+
+        // ---- 2. Création d'un album à supprimer ----
+        $album = new Album();
+        $album->setName('Album to delete');
+        $em->persist($album);
+        $em->flush();
+
+        $albumId = $album->getId();
+
+        // ---- 3. Appel de la route de suppression ----
+        $client->request('GET', '/admin/album/delete/'.$albumId);
+        $response = $client->getResponse();
+        echo $response->getStatusCode() . "\n";
+        echo $response->headers->get('Location') . "\n";
+        // Vérifie la redirection
+        $this->assertResponseRedirects('/admin/album');
+        $this->assertResponseStatusCodeSame(302);
+
+        // Vérification de la suppression
+        $deletedAlbum = $em->getRepository(Album::class)->find($albumId);
+        $this->assertNull($deletedAlbum, 'L’album devrait avoir été supprimé');
+
+        // ---- 4. Nettoyage de l'admin ----
+        $adminToRemove = $em->getRepository(User::class)->find($admin->getId());
+        if ($adminToRemove) {
+            $em->remove($adminToRemove);
+            $em->flush();
+        }
+    }
+
+
 }

@@ -96,11 +96,6 @@ class MediaController extends AbstractController
             $entityManager->persist($media);
             $entityManager->flush();
 
-            //            $media->setPath('uploads/' . md5(uniqid()) . '.' . $media->getFile()->guessExtension());
-            //            $media->getFile()->move('uploads/', $media->getPath());
-            //            $this->getDoctrine()->getManager()->persist($media);
-            //            $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('admin_media_index');
         }
 
