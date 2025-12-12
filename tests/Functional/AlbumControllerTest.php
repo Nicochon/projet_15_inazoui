@@ -116,7 +116,7 @@ class AlbumControllerTest extends WebTestCase
 
     public function testDeleteAlbum(): void
     {
-        require_once __DIR__ . '/../../src/Controller/Admin/AlbumController.php';
+        require_once __DIR__.'/../../src/Controller/Admin/AlbumController.php';
         $client = static::createClient();
         $em = $client->getContainer()->get('doctrine')->getManager();
 
@@ -144,8 +144,8 @@ class AlbumControllerTest extends WebTestCase
         // ---- 3. Appel de la route de suppression ----
         $client->request('GET', '/admin/album/delete/'.$albumId);
         $response = $client->getResponse();
-        echo $response->getStatusCode() . "\n";
-        echo $response->headers->get('Location') . "\n";
+        echo $response->getStatusCode()."\n";
+        echo $response->headers->get('Location')."\n";
         // Vérifie la redirection
         $this->assertResponseRedirects('/admin/album');
         $this->assertResponseStatusCodeSame(302);
@@ -161,6 +161,4 @@ class AlbumControllerTest extends WebTestCase
             $em->flush();
         }
     }
-
-
 }
