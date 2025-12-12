@@ -53,4 +53,40 @@ class FrontGuestTest extends WebTestCase
         // Vérifier que la page renvoie 404
         $this->assertResponseStatusCodeSame(404);
     }
+
+    public function testGuestsList(): void
+    {
+        $client = static::createClient();
+        $em = $client->getContainer()->get('doctrine')->getManager();
+
+        // Création d'un invité pour tester
+        $guest = new User();
+        $guest->setName('Guest Test');
+        $guest->setEmail('guest'.uniqid().'@test.com');
+        $guest->setRoles(['ROLE_USER']);
+        $guest->setActive(true);
+        $guest->setPassword(password_hash('guestpass', PASSWORD_BCRYPT));
+        $guest->setAdmin(false); // nécessaire pour le where('u.admin = false')
+        $em->persist($guest);
+        $em->flush();
+
+        // Appel de la route guests
+        // Remplace '/guests' par la route exacte de ton controller
+        $client->request('GET', '/guests');
+        $response = $client->getResponse();
+
+        // Vérifications
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseStatusCodeSame(200);
+
+        // Vérifie que le nom du guest créé est présent dans le contenu HTML
+        $this->assertStringContainsString('Guest Test', $response->getContent());
+
+        // Nettoyage
+        $guestToRemove = $em->getRepository(User::class)->find($guest->getId());
+        if ($guestToRemove) {
+            $em->remove($guestToRemove);
+            $em->flush();
+        }
+    }
 }

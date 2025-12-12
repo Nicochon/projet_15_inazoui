@@ -65,6 +65,11 @@ class AlbumController extends AbstractController
     public function delete(int $id, ManagerRegistry $doctrine): Response
     {
         $media = $doctrine->getRepository(Album::class)->find($id);
+
+        if (!$media) {
+            throw new \Exception('Album non trouvé');
+        }
+
         $doctrine->getManager()->remove($media);
         $doctrine->getManager()->flush();
 
